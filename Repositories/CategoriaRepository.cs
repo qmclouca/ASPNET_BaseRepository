@@ -6,11 +6,11 @@ namespace VendaLanches.Repositories
 {
     public class CategoriaRepository : ICategoriaRepository
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly AppDbContext _context;
         public CategoriaRepository(AppDbContext context)
         {
-            _appDbContext = context;
+            _context = context;
         }
-        public IEnumerable<Categoria> Categorias => throw new NotImplementedException();
+        public IEnumerable<Categoria> Categorias => _context.Categorias;
     }
 }
