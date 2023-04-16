@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VendaLanches.Context;
+using VendaLanches.Repositories;
+using VendaLanches.Repositories.Interfaces;
 
 namespace VendaLanches;
 
@@ -18,6 +20,9 @@ public class Startup
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         services.AddControllersWithViews();
+        //Registro de Serviços dos Repositórios
+        services.AddTransient<ILancheRepository, LancheRepository>();
+        services.AddTransient<ICategoriaRepository, CategoriaRepository>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
