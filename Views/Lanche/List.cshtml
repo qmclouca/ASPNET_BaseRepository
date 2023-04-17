@@ -1,8 +1,15 @@
 ﻿@model IEnumerable<VendaLanches.Models.Lanche>
 
 <div> 
-    <h2> Todos os Lanches </h2>
+    <h2> @ViewData["Título"] - @ViewData["Data"]</h2>
 </div>
+
+<hr />
+    <h3>@ViewBag.Total @ViewBag.TotalLanches</h3>
+<hr />
+
+<h3>@TempData["NomeProgramador"]</h3>
+
 @foreach (var lanche in Model)
 {
     <div>
