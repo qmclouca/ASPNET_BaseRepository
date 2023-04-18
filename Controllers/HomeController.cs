@@ -8,7 +8,6 @@ namespace VendaLanches.Controllers
     {       
         public IActionResult Index()
         {
-            TempData["NomeProgramador"] = "Rodolfo Bortoluzzi";
             return View();
         }
         public IActionResult Demo()
