@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VendaLanches.Models;
 using VendaLanches.Repositories.Interfaces;
+using VendaLanches.ViewModels;
 
 namespace VendaLanches.Controllers
 {
@@ -16,8 +16,12 @@ namespace VendaLanches.Controllers
         public IActionResult List()
         {
            
-            IEnumerable<Lanche> lanches = _lancheRepository.Lanches;
-            return View(lanches);
+            //IEnumerable<Lanche> lanches = _lancheRepository.Lanches;
+            //return View(lanches);
+            LancheListVewModel lancheListViewModel = new LancheListVewModel();
+            lancheListViewModel.Lanches = _lancheRepository.Lanches;
+            lancheListViewModel.CategoriaAtual = "Categoria Atual";
+            return View(lancheListViewModel);
         }
     }
 }
