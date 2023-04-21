@@ -17,12 +17,14 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-        services.AddControllersWithViews();
-        //Registro de Serviços dos Repositórios
+        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+        services.AddControllersWithViews();       
         services.AddTransient<ILancheRepository, LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddMemoryCache();
+        services.AddSession();
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,10 +41,9 @@ public class Startup
             app.UseHsts();
         }
         app.UseHttpsRedirection();
-
         app.UseStaticFiles();
         app.UseRouting();
-        app.UseAuthorization();
+        app.UseAuthorization();        
 
         app.UseEndpoints(endpoints =>
         {
