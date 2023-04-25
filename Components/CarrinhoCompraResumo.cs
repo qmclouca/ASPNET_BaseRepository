@@ -4,7 +4,7 @@ using VendaLanches.ViewModels;
 
 namespace VendaLanches.Components
 {
-    public class CarrinhoCompraResumo: ViewComponent
+    public class CarrinhoCompraResumo : ViewComponent
     {
         private readonly CarrinhoCompra _carrinhoCompra;
 
@@ -15,7 +15,14 @@ namespace VendaLanches.Components
 
         public IViewComponentResult Invoke()
         {
-            var itens = _carrinhoCompra.GetCarrinhoCompraItens();
+            //var itens = _carrinhoCompra.GetCarrinhoCompraItens();
+
+            var itens = new List<CarrinhoCompraItem>()
+            { new CarrinhoCompraItem(),
+              new CarrinhoCompraItem()
+            };
+
+
             _carrinhoCompra.CarrinhoCompraItens = itens;
 
             var carrinhoCompraViewModel = new CarrinhoCompraViewModel
