@@ -8,10 +8,12 @@ namespace VendaLanches.Controllers
     public class LancheController : Controller
     {
         private readonly ILancheRepository _lancheRepository;
+        private readonly ICategoriaRepository _categoriaRepository;
 
-        public LancheController(ILancheRepository lancheRepository)
+        public LancheController(ILancheRepository lancheRepository, ICategoriaRepository categoriaRepository)
         {
             _lancheRepository = lancheRepository;
+            _categoriaRepository = categoriaRepository;
         }
 
         public IActionResult List(string categoria)
@@ -26,25 +28,28 @@ namespace VendaLanches.Controllers
             }
             else
             {
-                if (string.Equals("Normal", categoria, StringComparison.OrdinalIgnoreCase))
+                if (categoria.ToUpper().Equals("NORMAL"))
                 {
-                    lanches = _lancheRepository.Lanches
-                        .Where(l => l.Categoria.CategoriaNome.ToLower().Equals("normal", StringComparison.Ordinal))
+                    int categoriaId = _categoriaRepository.Categorias.FirstOrDefault(c => c.CategoriaNome.ToUpper().Equals("NORMAL")).CategoriaId;
+                    lanches = _lancheRepository.Lanches.Where(l=> l.CategoriaId.Equals(categoriaId))
                         .OrderBy(l => l.Nome);
                 }
                 else
                 {
-                    lanches = _lancheRepository.Lanches.Where(x => x.Categoria.CategoriaNome.ToLower().Equals("natural")).OrderBy(l => l.Nome);
+                    int categoriaId = _categoriaRepository.Categorias.FirstOrDefault(c => c.CategoriaNome.ToUpper().Equals("NATURAL")).CategoriaId;
+                    lanches = _lancheRepository.Lanches.Where(l => l.CategoriaId.Equals(categoriaId))
+                        .OrderBy(l => l.Nome);
                 }
                 categoriaAtual = categoria;
             }
-            var lanchesListViewModel = new LancheListVewModel
+
+            var lanchesListViewModel = new LancheListViewModel
             {
                 Lanches = lanches,
                 CategoriaAtual = categoriaAtual
             };
-            return View(lanchesListViewModel);
 
+            return View(lanchesListViewModel);
         }
     }
 }
