@@ -51,6 +51,14 @@ public class Startup
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            endpoints.MapControllerRoute(
+                name: "admin",
+                pattern: "admin/{action=Index}/{id?}",
+                defaults: new {controller ="admin"});
+            endpoints.MapControllerRoute(
+                name: "teste",
+                pattern: "teste-me",
+                defaults: new {controller="teste", Action= "index"});
         });
     }
 }
