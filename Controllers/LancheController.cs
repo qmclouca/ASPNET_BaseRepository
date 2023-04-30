@@ -28,18 +28,21 @@ namespace VendaLanches.Controllers
             }
             else
             {
-                if (categoria.ToUpper().Equals("NORMAL"))
-                {
-                    int categoriaId = _categoriaRepository.Categorias.FirstOrDefault(c => c.CategoriaNome.ToUpper().Equals("NORMAL")).CategoriaId;
-                    lanches = _lancheRepository.Lanches.Where(l=> l.CategoriaId.Equals(categoriaId))
-                        .OrderBy(l => l.Nome);
-                }
-                else
-                {
-                    int categoriaId = _categoriaRepository.Categorias.FirstOrDefault(c => c.CategoriaNome.ToUpper().Equals("NATURAL")).CategoriaId;
-                    lanches = _lancheRepository.Lanches.Where(l => l.CategoriaId.Equals(categoriaId))
-                        .OrderBy(l => l.Nome);
-                }
+                lanches = _lancheRepository.Lanches
+                    .Where(l => l.Categoria.CategoriaNome.Equals(categoria))
+                    .OrderBy(c => c.Nome);
+                //if (categoria.ToUpper().Equals("NORMAL"))
+                //{
+                //    int categoriaId = _categoriaRepository.Categorias.FirstOrDefault(c => c.CategoriaNome.ToUpper().Equals("NORMAL")).CategoriaId;
+                //    lanches = _lancheRepository.Lanches.Where(l=> l.CategoriaId.Equals(categoriaId))
+                //        .OrderBy(l => l.Nome);
+                //}
+                //else
+                //{
+                //    int categoriaId = _categoriaRepository.Categorias.FirstOrDefault(c => c.CategoriaNome.ToUpper().Equals("NATURAL")).CategoriaId;
+                //    lanches = _lancheRepository.Lanches.Where(l => l.CategoriaId.Equals(categoriaId))
+                //        .OrderBy(l => l.Nome);
+                //}
                 categoriaAtual = categoria;
             }
 
