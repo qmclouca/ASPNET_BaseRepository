@@ -31,18 +31,7 @@ namespace VendaLanches.Controllers
                 lanches = _lancheRepository.Lanches
                     .Where(l => l.Categoria.CategoriaNome.Equals(categoria))
                     .OrderBy(c => c.Nome);
-                //if (categoria.ToUpper().Equals("NORMAL"))
-                //{
-                //    int categoriaId = _categoriaRepository.Categorias.FirstOrDefault(c => c.CategoriaNome.ToUpper().Equals("NORMAL")).CategoriaId;
-                //    lanches = _lancheRepository.Lanches.Where(l=> l.CategoriaId.Equals(categoriaId))
-                //        .OrderBy(l => l.Nome);
-                //}
-                //else
-                //{
-                //    int categoriaId = _categoriaRepository.Categorias.FirstOrDefault(c => c.CategoriaNome.ToUpper().Equals("NATURAL")).CategoriaId;
-                //    lanches = _lancheRepository.Lanches.Where(l => l.CategoriaId.Equals(categoriaId))
-                //        .OrderBy(l => l.Nome);
-                //}
+                
                 categoriaAtual = categoria;
             }
 
@@ -53,6 +42,12 @@ namespace VendaLanches.Controllers
             };
 
             return View(lanchesListViewModel);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var lanche = _lancheRepository.Lanches.FirstOrDefault(l => l.LancheId.Equals(id));
+            return View(lanche);
         }
     }
 }
