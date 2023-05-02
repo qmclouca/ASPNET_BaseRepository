@@ -39,7 +39,7 @@ namespace VendaLanches.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        
         public RedirectToActionResult RemoverItemNoCarrinhoCompra(int lancheId)
         {
             var lancheSelecionado = _lancheRepository.Lanches.FirstOrDefault(x => x.LancheId == lancheId);
