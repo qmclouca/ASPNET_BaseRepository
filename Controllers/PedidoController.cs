@@ -47,7 +47,7 @@ namespace VendaLanches.Controllers
             {
                 _pedidoRepository.CriarPedido(pedido);
 
-                ViewBag.CheckoutCompletoMensagem = "Obrigado pelo seu pedido :) ";
+                ViewBag.CheckoutCompletoMensagem = "Obrigado pelo seu pedido!";
                 ViewBag.TotalPedido = _carrinhoCompra.GetCarrinhoCompraTotal();
                 ViewBag.ItensPedido = _carrinhoCompra.GetCarrinhoCompraItens().Count;
 
