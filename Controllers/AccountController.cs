@@ -47,5 +47,32 @@ namespace VendaLanches.Controllers
             ModelState.AddModelError("", "Falha ao realizar o login.");
             return View(loginVM);
         }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(LoginViewModel registroViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var user = new IdentityUser { UserName = registroViewModel.UserName };
+                var result = await _userManager.CreateAsync(user, registroViewModel.Password);
+
+                if (result.Succeeded)
+                {
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Login", "Account");
+                }
+                else
+                {
+                    this.ModelState.AddModelError("Registro", "Falha ao registrar o usuário");
+                }
+            }
+            return View(registroViewModel);
+        }
     }
 }
