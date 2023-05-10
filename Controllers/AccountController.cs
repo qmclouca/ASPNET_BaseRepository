@@ -57,14 +57,14 @@ namespace VendaLanches.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(LoginViewModel registroViewModel)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = registroViewModel.UserName };
                 var result = await _userManager.CreateAsync(user, registroViewModel.Password);
 
                 if (result.Succeeded)
                 {
-                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Login", "Account");
                 }
                 else
