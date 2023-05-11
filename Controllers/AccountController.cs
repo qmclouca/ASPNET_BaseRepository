@@ -74,5 +74,14 @@ namespace VendaLanches.Controllers
             }
             return View(registroViewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.User = null;
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
+        }
     }
 }
