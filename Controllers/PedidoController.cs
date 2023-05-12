@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using VendaLanches.Models;
 using VendaLanches.Repositories.Interfaces;
 
@@ -15,12 +16,15 @@ namespace VendaLanches.Controllers
             _pedidoRepository = pedidoRepository;
         }
 
+        [Authorize]
         public IActionResult Checkout()
         {
             return View();
         }
 
+
         [HttpPost]
+        [Authorize]
         public IActionResult Checkout(Pedido pedido)
         {
             int totalItensPedido = 0;
