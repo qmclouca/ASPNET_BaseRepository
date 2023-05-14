@@ -31,7 +31,7 @@ public class Startup
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequiredLength = 4;
             options.Password.RequiredUniqueChars = 1;
-        }); //Redefinir requisitos de senha antes de publicar em PRD
+        }); //TODO: Redefinir requisitos de senha antes de publicar em PRD
         services.AddControllersWithViews();
         services.AddTransient<ILancheRepository, LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
@@ -65,7 +65,7 @@ public class Startup
         {
             endpoints.MapControllerRoute(
                 name: "areas",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
 
             endpoints.MapControllerRoute(
                 name: "categoriaFiltro",
