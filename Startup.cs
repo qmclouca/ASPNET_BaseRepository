@@ -4,6 +4,7 @@ using VendaLanches.Context;
 using VendaLanches.Models;
 using VendaLanches.Repositories;
 using VendaLanches.Repositories.Interfaces;
+using VendaLanches.Services;
 
 namespace VendaLanches;
 
@@ -36,6 +37,7 @@ public class Startup
         services.AddTransient<ILancheRepository, LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
         services.AddTransient<IPedidoRepository, PedidoRepository>();
+        services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
         services.AddMemoryCache();
