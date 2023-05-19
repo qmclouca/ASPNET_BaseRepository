@@ -24,14 +24,14 @@ namespace VendaLanches.Areas.Admin.Controllers
         //      return View(await _context.Pedidos.ToListAsync());
         //}
 
-        public async Task<IActionResult> Index(string filter, int pageindex =1, string sort = "Nome")
+        public async Task<IActionResult> Index(string filter, int pageindex = 1, string sort = "Nome")
         {
             IQueryable<Pedido> result = _context.Pedidos.AsNoTracking().AsQueryable(); //montando consulta
             if (!string.IsNullOrWhiteSpace(filter))
             {
                 result = result.Where(p=>p.Nome.Contains(filter)); //Incluindo parâmetro nome na consulta
             }
-            PagingList<Pedido> model = await PagingList.CreateAsync(result, 5, pageindex, sort, "Nome"); //Recuperando dados paginados
+            PagingList<Pedido> model = await PagingList.CreateAsync(result, 4, pageindex, sort, "Nome"); //Recuperando dados paginados
             model.RouteValue = new RouteValueDictionary { { "filter", filter } }; //Rota para o critério de filtragem do componente
             return View(model);
         }
