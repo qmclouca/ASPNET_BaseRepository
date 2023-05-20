@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 using VendaLanches.Context;
 using VendaLanches.Models;
 
@@ -19,11 +20,24 @@ namespace VendaLanches.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminLanches
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var appDbContext = _context.Lanches.Include(l => l.Categoria);
+        //    return View(await appDbContext.ToListAsync());
+        //}
+
+        public async Task<IActionResult> Index(string filter, int pageindex = 1, string sort = "Nome")
         {
-            var appDbContext = _context.Lanches.Include(l => l.Categoria);
-            return View(await appDbContext.ToListAsync());
+            IQueryable<Lanche> result = _context.Lanches.AsNoTracking().Include(l => l.Categoria).AsQueryable(); //montando consulta
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                result = result.Where(p => p.Nome.Contains(filter)); //Incluindo parâmetro nome na consulta
+            }
+            PagingList<Lanche> model = await PagingList.CreateAsync(result, 4, pageindex, sort, "Nome"); //Recuperando dados paginados
+            model.RouteValue = new RouteValueDictionary { { "filter", filter } }; //Rota para o critério de filtragem do componente
+            return View(model);
         }
+
 
         // GET: Admin/AdminLanches/Details/5
         public async Task<IActionResult> Details(int? id)
