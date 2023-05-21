@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
 using VendaLanches.Context;
 using VendaLanches.Models;
+using VendaLanches.ViewModels;
 
 namespace VendaLanches.Areas.Admin.Controllers
 {
@@ -18,11 +19,27 @@ namespace VendaLanches.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/AdminPedidos
-        //public async Task<IActionResult> Index()
-        //{
-        //      return View(await _context.Pedidos.ToListAsync());
-        //}
+        public IActionResult PedidoLanches(int? id)
+        {
+            var pedido = _context.Pedidos
+                            .Include(pd => pd.PedidosItens)
+                            .ThenInclude(l => l.Lanche)
+                            .FirstOrDefault(p => p.PedidoId == id);
+
+            if (pedido == null)
+            {
+                Response.StatusCode = 404;
+                return View("PedidoNotFound", id.Value);
+            }
+
+            PedidoLancheViewModel pedidoLanches = new PedidoLancheViewModel()
+            {
+                Pedido = pedido,
+                PedidoDetalhe = pedido.PedidosItens
+            };
+            return View(pedidoLanches);
+        }
+    
 
         public async Task<IActionResult> Index(string filter, int pageindex = 1, string sort = "Nome")
         {
