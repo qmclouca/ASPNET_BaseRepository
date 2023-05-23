@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 using VendaLanches.Areas.Admin.Services;
 
 namespace VendaLanches.Areas.Admin.Controllers

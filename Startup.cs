@@ -35,6 +35,7 @@ public class Startup
             options.Password.RequiredLength = 4;
             options.Password.RequiredUniqueChars = 1;
         }); //TODO: Redefinir requisitos de senha antes de publicar em PRD
+        services.Configure<ConfigurationImages>(Configuration.GetSection("ConfigurationImages"));
         services.AddControllersWithViews();
         services.AddTransient<ILancheRepository, LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
