@@ -1,4 +1,4 @@
-﻿<table border="" width="100%">
+﻿<table border="0" width="100%">
     <tr>
         <td>
             <form method="post" enctype="multipart/form-data" asp-controller="AdminImages" asp-action="UploadFiles">
@@ -29,10 +29,16 @@
                 <hr />
                 <div class="form-group">
                     <div class="col-md-10">
-                        <input type="submit" value="Visualizar arquivos de imagens" class="button btn-outline-primary"/>
+                        <input type="submit" value="Visualizar arquivos de imagens" class="button btn-outline-warning"/>
                     </div>
                 </div>
             </form>
         </td>
     </tr>
 </table>
+<div class="container">
+    @if (ViewData["Deletado"] != null)
+    {
+        <li>@ViewData["Deletado"]</li>
+    }
+</div>
