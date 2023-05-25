@@ -58,5 +58,32 @@ namespace VendaLanches.Areas.Admin.Controllers
             ViewBag.Arquivos = filesPathsNames;
             return View(ViewData);
         }
+
+        public IActionResult GetImages()
+        {
+            FileManagerModel model = new FileManagerModel();
+            var userImagesPath = Path.Combine(_webHostEnvironment.WebRootPath, _myConfig.NomePastaImagensProdutos);
+
+            DirectoryInfo dir = new DirectoryInfo(userImagesPath);
+            FileInfo[] files = dir.GetFiles();
+            model.PathImagesProduto = _myConfig.NomePastaImagensProdutos;
+            if (files.Length == 0)
+            {
+                ViewData["Erro"] = $"Nenhum arquivo encontrado na pasta {userImagesPath}";
+            }
+            model.Files = files;
+            return View(model);
+        }
+
+        public IActionResult DeleteFile(string fname)
+        {
+            string _imagemParaDeletar = Path.Combine(_webHostEnvironment.WebRootPath, _myConfig.NomePastaImagensProdutos + "//", fname);
+            if (System.IO.File.Exists(_imagemParaDeletar))
+            {
+                System.IO.File.Delete(_imagemParaDeletar);
+                ViewData["Deletado"] = $"Arquivo(s) {_imagemParaDeletar} apagado com sucesso.";
+            }
+            return View("index");
+        }
     }
 }
