@@ -18,7 +18,7 @@ namespace VendaLanches.Areas.Admin.Services
             var lanches = (from detalhesPedido in _context.PedidoDetalhes
                            join lanche in _context.Lanches on detalhesPedido.LancheId equals lanche.LancheId
                            where detalhesPedido.Pedido.PedidoEnviado >= data
-                           group detalhesPedido by new { detalhesPedido.LancheId, lanche.Nome, detalhesPedido.Quantidade }
+                           group detalhesPedido by new { detalhesPedido.LancheId, lanche.Nome }
                            into g
                            select new
                            {
