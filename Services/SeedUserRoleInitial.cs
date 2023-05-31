@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace VendaLanches.Services
+namespace VendaLanches.builder.Services
 {
     public class SeedUserRoleInitial : ISeedUserRoleInitial
     {
