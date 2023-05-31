@@ -1,7 +1,7 @@
 ﻿using VendaLanches.Context;
 using VendaLanches.Models;
 
-namespace VendaLanches.Areas.Admin.Services
+namespace VendaLanches.Areas.Admin.builder.Services
 {
     public class GraficoVendasService
     {

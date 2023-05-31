@@ -1,4 +1,4 @@
-﻿namespace VendaLanches.Services
+﻿namespace VendaLanches.builder.Services
 {
     public interface ISeedUserRoleInitial
     {
