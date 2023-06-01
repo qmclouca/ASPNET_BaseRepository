@@ -1,13 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
+using ReflectionIT.Mvc.Paging;
 using VendaLanches.Areas.Admin.builder.Services;
+using VendaLanches.builder.Services;
 using VendaLanches.Context;
 using VendaLanches.Models;
-using VendaLanches.Repositories.Interfaces;
 using VendaLanches.Repositories;
-using VendaLanches.builder.Services;
-using ReflectionIT.Mvc.Paging;
+using VendaLanches.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
