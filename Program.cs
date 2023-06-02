@@ -1,3 +1,4 @@
+using FastReport.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
@@ -26,6 +27,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 }); //TODO: Redefinir requisitos de senha antes de publicar em PRD
 
 builder.Services.AddControllersWithViews();
+
+FastReport.Utils.RegisteredObjects.AddConnection(typeof(MsSqlDataConnection));
 builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<IPedidoRepository, PedidoRepository>();
@@ -65,6 +68,7 @@ app.UseSession();
 app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseFastReport();
 app.UseRouting();
 
 CriarPerfisUsuarios(app);
