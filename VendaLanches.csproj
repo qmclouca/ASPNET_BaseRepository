@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Images\Produtos\" />
+    <Folder Include="wwwroot\reports\" />
   </ItemGroup>
 
   <ItemGroup>
