@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
 using VendaLanches.Areas.Admin.builder.Services;
+using VendaLanches.Areas.Admin.Services;
 using VendaLanches.builder.Services;
 using VendaLanches.Context;
 using VendaLanches.Models;
@@ -35,6 +36,7 @@ builder.Services.AddTransient<IPedidoRepository, PedidoRepository>();
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
 builder.Services.AddScoped<RelatorioVendasService>();
 builder.Services.AddScoped<GraficoVendasService>();
+builder.Services.AddScoped<RelatorioLanchesService>();
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Admin",
